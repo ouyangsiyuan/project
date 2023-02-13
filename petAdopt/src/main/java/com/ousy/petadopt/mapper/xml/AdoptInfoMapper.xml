@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ousy.petadopt.mapper.AdoptInfoMapper">
+    <select id="statisticsAdopt" resultType="com.ousy.petadopt.vo.AdoptStatisticsVo">
+        select
+            count(0) as totalNum,
+            IFNULL(SUM(CASE WHEN status = '0' THEN 1 ELSE 0 END ),0) AS toBeReviewedNum,
+            IFNULL(SUM(CASE WHEN status = '1' THEN 1 ELSE 0 END ),0) AS pendingAdoptionNum,
+            IFNULL(SUM(CASE WHEN status = '2' THEN 1 ELSE 0 END ),0) AS haveCompletedNum
+        from
+            adopt_info
+    </select>
+</mapper>
